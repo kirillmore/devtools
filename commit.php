@@ -14,7 +14,7 @@ function getProductVersion($opt){
     $add=substr($c,strripos($c,'-')+1);
   }
 
-  if(!isset($opt)) return $c;
+  if($opt=='now') return $c;
   if($opt=='next') return 'v'.$version.'.'.++$subversion;
   if($opt=='nextbeta') return 'v'.$version.'.'.$subversion.'-'.++$add;
   if($opt=='version') return $version;
@@ -31,21 +31,21 @@ if($_GET['a']=='commit'){
   file_put_contents('../'.$_GET['path'].'/version.txt', getProductVersion('next'));
   chdir('../'.$_GET['path']);
   shell_exec("git add -A");
-  shell_exec("git commit -m ".getProductVersion());
+  shell_exec("git commit -m ".getProductVersion('now'));
 }
 
 if($_GET['a']=='commitnextbeta'){
   file_put_contents('../'.$_GET['path'].'/version.txt', getProductVersion('nextbeta'));
   chdir('../'.$_GET['path']);
   shell_exec("git add -A");
-  shell_exec("git commit -m ".getProductVersion());
+  shell_exec("git commit -m ".getProductVersion('now'));
 }
 
 if($_GET['a']=='pushprod'){
   file_put_contents('../'.$_GET['path'].'/version.txt', getProductVersion('next'));
   chdir('../'.$_GET['path']);
   shell_exec("git add -A");
-  shell_exec("git commit -m ".getProductVersion());
+  shell_exec("git commit -m ".getProductVersion('now'));
   shell_exec("git ftp -s prod push -P");
 }
 
@@ -53,7 +53,7 @@ if($_GET['a']=='pushprodnextbeta'){
   file_put_contents('../'.$_GET['path'].'/version.txt', getProductVersion('nextbeta'));
   chdir('../'.$_GET['path']);
   shell_exec("git add -A");
-  shell_exec("git commit -m ".getProductVersion());
+  shell_exec("git commit -m ".getProductVersion('now'));
   shell_exec("git ftp -s prod push -P");
 }
 
@@ -61,7 +61,7 @@ if($_GET['a']=='pushdev'){
   file_put_contents('../'.$_GET['path'].'/version.txt', getProductVersion('next'));
   chdir('../'.$_GET['path']);
   shell_exec("git add -A");
-  shell_exec("git commit -m ".getProductVersion());
+  shell_exec("git commit -m ".getProductVersion('now'));
   shell_exec("git ftp -s dev push -P");
 }
 
@@ -71,7 +71,7 @@ if($_GET['a']=='pushdev'){
 }
 
 if($_GET['a']=='config'){
-  echo 'now: '.getProductVersion().'<br>';
+  echo 'now: '.getProductVersion('now').'<br>';
   echo 'version: '.getProductVersion('version').'<br>';
   echo 'subversion: '.getProductVersion('subversion').'<br>';
   echo 'add: '.getProductVersion('add').'<br>';
