@@ -1,8 +1,9 @@
 <?
 include('functions.php');
+$path="../../../logs/php_error.log";
+$file=file($path);
+//$file=array_reverse($file);
 ?>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,14 +19,9 @@ include('functions.php');
   <!--less-->
   <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
-<body>  
+<body>
+  <div class="linestotal"><?=countLines($path);?></div>
 <?
-$path="../../../logs/php_error.log";
-
-echo lines($path);
-
-$file=file($path);
-// $file=array_reverse($file);
 $line=1;
 foreach($file as $f){
   if($f!==''){

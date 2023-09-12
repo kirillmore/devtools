@@ -11,7 +11,7 @@ function addTags($s){
   return $s;
 }
 
-function lines($file){
+function countLines($file){
   //количество строк в файле
   if(!file_exists($file))exit("Файл не найден");    
   $file_arr=file($file); 

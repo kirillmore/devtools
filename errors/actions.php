@@ -5,13 +5,11 @@ $line=$_GET['line'];
 
 function deleteLineFromFile($filename, $lineToDelete){
   $n=1;
-  $file=fopen($filename, "r");
+  $file=fopen($filename,"r");
   $tempFile=fopen("../../../logs/php_error.tmp", "w");
   while(!feof($file)){
     $line=fgets($file);
-    if($lineToDelete!=$n){
-      fwrite($tempFile, $line);
-    }
+    if($lineToDelete!=$n) fwrite($tempFile, $line);
     $n++;
   }
   fclose($file);
@@ -21,20 +19,18 @@ function deleteLineFromFile($filename, $lineToDelete){
 }
 
 function deleteLineFromFileSameStrings($filename, $lineToDelete){
-
-
   $file=fopen($filename, "r");
   $tempFile=fopen("../../../logs/php_error.tmp", "w");
   while(!feof($file)){
     $line=fgets($file);
-
     // $mystring = 'abc';
     // $findme   = 'a';
-    $pos = strpos($line, $lineToDelete);
-    if ($pos === false) {
+    $pos=strpos($line, $lineToDelete);
+    if($pos===false) {
       fwrite($tempFile, $line);
       echo "Строка ".$lineToDelete." не найдена в строке ".$line."\n";
-    } else {
+    }
+    else{
       echo "Строка ".$lineToDelete." найдена в строке ".$line."\n";
     }
   }
@@ -42,7 +38,6 @@ function deleteLineFromFileSameStrings($filename, $lineToDelete){
   fclose($tempFile);
   unlink($filename);
   rename("../../../logs/php_error.tmp", $filename);
-
 }
 
 if($a=='del'){
