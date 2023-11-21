@@ -28,16 +28,17 @@ function deleteLineFromFileSameStrings($filename, $lineToDelete){
     $pos=strpos($line, $lineToDelete);
     if($pos===false) {
       fwrite($tempFile, $line);
-      echo "Строка ".$lineToDelete." не найдена в строке ".$line."\n";
+      // echo "Строка ".$lineToDelete." не найдена в строке ".$line."\n";
     }
     else{
-      echo "Строка ".$lineToDelete." найдена в строке ".$line."\n";
+      // echo "Строка ".$lineToDelete." найдена в строке ".$line."\n";
     }
   }
   fclose($file);
   fclose($tempFile);
   unlink($filename);
   rename("../../../logs/php_error.tmp", $filename);
+  changeLocation('index.php');
 }
 
 if($a=='del'){
@@ -46,7 +47,7 @@ if($a=='del'){
 }
 
 if($a=='delSame'){
-  deleteLineFromFileSameStrings("../../../logs/php_error.log", $line);
+  if ($line!='') deleteLineFromFileSameStrings("../../../logs/php_error.log", $line);
   changeLocation('index.php');
 }
 

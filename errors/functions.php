@@ -20,6 +20,11 @@ function countLines($file){
 }
 
 function sameLine($s) {
-  return mb_strcut($s, 37);
+  if (mb_substr($s,0,1)=='[') {
+    return mb_strcut($s, 37);
+  }
+  else {
+    return urlencode($s);
+  }
 }
 ?>
