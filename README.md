@@ -19,5 +19,6 @@
 ## 1. Usage
 Add this line to index.php file:
 ```
-<?if($_SERVER['SERVER_NAME']=='localhost') echo'<script src="../_devtools/moreDev.js?path='.$current_page=str_replace("/","",strtolower(parse_url("http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",PHP_URL_PATH))).'"></script>';?>
+<?if($_SERVER['SERVER_NAME']=='localhost') echo'<script id="moredev" src="../_devtools/moreDev.js?path='.$current_page=str_replace("/","",strtolower(parse_url("http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",PHP_URL_PATH))).'"></script>';?>
+
 ```
